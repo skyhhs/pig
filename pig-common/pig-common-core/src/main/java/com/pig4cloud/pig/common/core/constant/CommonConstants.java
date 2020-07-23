@@ -1,17 +1,19 @@
 /*
- *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
- *  <p>
- *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  <p>
- * https://www.gnu.org/licenses/lgpl.html
- *  <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+ *  *  <p>
+ *  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+ *  *  you may not use this file except in compliance with the License.
+ *  *  You may obtain a copy of the License at
+ *  *  <p>
+ *  * https://www.gnu.org/licenses/lgpl.html
+ *  *  <p>
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
  */
 
 package com.pig4cloud.pig.common.core.constant;
@@ -21,10 +23,12 @@ package com.pig4cloud.pig.common.core.constant;
  * @date 2019/2/1
  */
 public interface CommonConstants {
+
 	/**
 	 * 删除
 	 */
 	String STATUS_DEL = "1";
+
 	/**
 	 * 正常
 	 */
@@ -34,6 +38,11 @@ public interface CommonConstants {
 	 * 锁定
 	 */
 	String STATUS_LOCK = "9";
+
+	/**
+	 * 菜单树根节点
+	 */
+	Integer MENU_TREE_ROOT_ID = -1;
 
 	/**
 	 * 菜单
@@ -64,6 +73,7 @@ public interface CommonConstants {
 	 * 成功标记
 	 */
 	Integer SUCCESS = 0;
+
 	/**
 	 * 失败标记
 	 */
@@ -73,4 +83,15 @@ public interface CommonConstants {
 	 * 验证码前缀
 	 */
 	String DEFAULT_CODE_KEY = "DEFAULT_CODE_KEY_";
+
+	/**
+	 * 当前页
+	 */
+	String CURRENT = "current";
+
+	/**
+	 * size
+	 */
+	String SIZE = "size";
+
 }

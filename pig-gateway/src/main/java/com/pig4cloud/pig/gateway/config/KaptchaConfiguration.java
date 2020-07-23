@@ -1,17 +1,19 @@
 /*
- *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
- *  <p>
- *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  <p>
- * https://www.gnu.org/licenses/lgpl.html
- *  <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+ *  *  <p>
+ *  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+ *  *  you may not use this file except in compliance with the License.
+ *  *  You may obtain a copy of the License at
+ *  *  <p>
+ *  * https://www.gnu.org/licenses/lgpl.html
+ *  *  <p>
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
  */
 
 package com.pig4cloud.pig.gateway.config;
@@ -31,11 +33,17 @@ import java.util.Properties;
 public class KaptchaConfiguration {
 
 	private static final String KAPTCHA_BORDER = "kaptcha.border";
+
 	private static final String KAPTCHA_TEXTPRODUCER_FONT_COLOR = "kaptcha.textproducer.font.color";
+
 	private static final String KAPTCHA_TEXTPRODUCER_CHAR_SPACE = "kaptcha.textproducer.char.space";
+
 	private static final String KAPTCHA_IMAGE_WIDTH = "kaptcha.image.width";
+
 	private static final String KAPTCHA_IMAGE_HEIGHT = "kaptcha.image.height";
+
 	private static final String KAPTCHA_TEXTPRODUCER_CHAR_LENGTH = "kaptcha.textproducer.char.length";
+
 	private static final Object KAPTCHA_IMAGE_FONT_SIZE = "kaptcha.textproducer.font.size";
 
 	/**
@@ -52,6 +60,7 @@ public class KaptchaConfiguration {
 	 * 默认生成图形验证码长度
 	 */
 	private static final String DEFAULT_IMAGE_LENGTH = "4";
+
 	/**
 	 * 边框颜色，合法值： r,g,b (and optional alpha) 或者 white,black,blue.
 	 */
@@ -61,10 +70,12 @@ public class KaptchaConfiguration {
 	 * 图片边框
 	 */
 	private static final String DEFAULT_IMAGE_BORDER = "no";
+
 	/**
 	 * 默认图片间隔
 	 */
 	private static final String DEFAULT_CHAR_SPACE = "5";
+
 	/**
 	 * 验证码文字大小
 	 */
@@ -85,4 +96,5 @@ public class KaptchaConfiguration {
 		defaultKaptcha.setConfig(config);
 		return defaultKaptcha;
 	}
+
 }

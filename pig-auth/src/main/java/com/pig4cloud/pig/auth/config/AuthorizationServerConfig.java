@@ -1,26 +1,29 @@
 /*
- *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
- *  <p>
- *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  <p>
- * https://www.gnu.org/licenses/lgpl.html
- *  <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+ *  *  <p>
+ *  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+ *  *  you may not use this file except in compliance with the License.
+ *  *  You may obtain a copy of the License at
+ *  *  <p>
+ *  * https://www.gnu.org/licenses/lgpl.html
+ *  *  <p>
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
  */
 
 package com.pig4cloud.pig.auth.config;
 
+import com.pig4cloud.pig.common.core.constant.CacheConstants;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.security.component.PigWebResponseExceptionTranslator;
 import com.pig4cloud.pig.common.security.service.PigClientDetailsService;
 import com.pig4cloud.pig.common.security.service.PigUser;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,16 +47,19 @@ import java.util.Map;
 
 /**
  * @author lengleng
- * @date 2019/2/1
- * 认证服务器配置
+ * @date 2019/2/1 认证服务器配置
  */
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
 	private final DataSource dataSource;
+
 	private final UserDetailsService userDetailsService;
+
 	private final AuthenticationManager authenticationManager;
+
 	private final RedisConnectionFactory redisConnectionFactory;
 
 	@Override
@@ -67,28 +73,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-		oauthServer
-			.allowFormAuthenticationForClients()
-			.checkTokenAccess("permitAll()");
+		oauthServer.allowFormAuthenticationForClients().checkTokenAccess("permitAll()");
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-		endpoints
-			.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-			.tokenStore(tokenStore())
-			.tokenEnhancer(tokenEnhancer())
-			.userDetailsService(userDetailsService)
-			.authenticationManager(authenticationManager)
-			.reuseRefreshTokens(false)
-			.exceptionTranslator(new PigWebResponseExceptionTranslator());
+		endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST).tokenStore(tokenStore())
+				.tokenEnhancer(tokenEnhancer()).userDetailsService(userDetailsService)
+				.authenticationManager(authenticationManager).reuseRefreshTokens(false)
+				.pathMapping("/oauth/confirm_access", "/token/confirm_access")
+				.exceptionTranslator(new PigWebResponseExceptionTranslator());
 	}
-
 
 	@Bean
 	public TokenStore tokenStore() {
 		RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-		tokenStore.setPrefix(SecurityConstants.PROJECT_PREFIX + SecurityConstants.OAUTH_PREFIX);
+		tokenStore.setPrefix(CacheConstants.PROJECT_OAUTH_ACCESS);
 		return tokenStore;
 	}
 
@@ -105,4 +105,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			return accessToken;
 		};
 	}
+
 }

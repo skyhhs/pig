@@ -2,7 +2,9 @@ FROM anapsix/alpine-java:8_server-jre_unlimited
 
 MAINTAINER wangiegie@gmail.com
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ENV TZ=Asia/Shanghai
+
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN mkdir -p /pig-gateway
 
@@ -10,6 +12,6 @@ WORKDIR /pig-gateway
 
 EXPOSE 9999
 
-ADD ./pig-gateway/target/pig-gateway.jar ./
+ADD ./target/pig-gateway.jar ./
 
 CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar pig-gateway.jar

@@ -1,17 +1,19 @@
 /*
- *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
- *  <p>
- *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  <p>
- * https://www.gnu.org/licenses/lgpl.html
- *  <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+ *  *  <p>
+ *  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+ *  *  you may not use this file except in compliance with the License.
+ *  *  You may obtain a copy of the License at
+ *  *  <p>
+ *  * https://www.gnu.org/licenses/lgpl.html
+ *  *  <p>
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
  */
 
 package com.pig4cloud.pig.admin.controller;
@@ -22,7 +24,8 @@ import com.pig4cloud.pig.admin.api.entity.SysOauthClientDetails;
 import com.pig4cloud.pig.admin.service.SysOauthClientDetailsService;
 import com.pig4cloud.pig.common.core.util.R;
 import com.pig4cloud.pig.common.log.annotation.SysLog;
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.Api;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,27 +40,26 @@ import javax.validation.Valid;
  * @since 2018-05-15
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/client")
+@Api(value = "client", tags = "客户端管理模块")
 public class OauthClientDetailsController {
+
 	private final SysOauthClientDetailsService sysOauthClientDetailsService;
 
 	/**
 	 * 通过ID查询
-	 *
-	 * @param id ID
+	 * @param id clientId
 	 * @return SysOauthClientDetails
 	 */
 	@GetMapping("/{id}")
-	public R getById(@PathVariable Integer id) {
+	public R getById(@PathVariable String id) {
 		return R.ok(sysOauthClientDetailsService.getById(id));
 	}
 
-
 	/**
 	 * 简单分页查询
-	 *
-	 * @param page                  分页对象
+	 * @param page 分页对象
 	 * @param sysOauthClientDetails 系统终端
 	 * @return
 	 */
@@ -68,7 +70,6 @@ public class OauthClientDetailsController {
 
 	/**
 	 * 添加
-	 *
 	 * @param sysOauthClientDetails 实体
 	 * @return success/false
 	 */
@@ -81,7 +82,6 @@ public class OauthClientDetailsController {
 
 	/**
 	 * 删除
-	 *
 	 * @param id ID
 	 * @return success/false
 	 */
@@ -94,7 +94,6 @@ public class OauthClientDetailsController {
 
 	/**
 	 * 编辑
-	 *
 	 * @param sysOauthClientDetails 实体
 	 * @return success/false
 	 */
@@ -104,4 +103,5 @@ public class OauthClientDetailsController {
 	public R update(@Valid @RequestBody SysOauthClientDetails sysOauthClientDetails) {
 		return R.ok(sysOauthClientDetailsService.updateClientDetailsById(sysOauthClientDetails));
 	}
+
 }

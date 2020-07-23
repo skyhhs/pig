@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
-  ~  <p>
-  ~  Licensed under the GNU Lesser General Public License 3.0 (the "License");
-  ~  you may not use this file except in compliance with the License.
-  ~  You may obtain a copy of the License at
-  ~  <p>
-  ~ https://www.gnu.org/licenses/lgpl.html
-  ~  <p>
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
+  ~ /*
+  ~  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+  ~  *  <p>
+  ~  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+  ~  *  you may not use this file except in compliance with the License.
+  ~  *  You may obtain a copy of the License at
+  ~  *  <p>
+  ~  * https://www.gnu.org/licenses/lgpl.html
+  ~  *  <p>
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
@@ -21,7 +23,7 @@
 	<parent>
 		<groupId>com.pig4cloud</groupId>
 		<artifactId>pig-upms</artifactId>
-		<version>2.6.1</version>
+		<version>2.8.0</version>
 	</parent>
 
 	<artifactId>pig-upms-biz</artifactId>
@@ -34,25 +36,31 @@
 		<dependency>
 			<groupId>com.pig4cloud</groupId>
 			<artifactId>pig-upms-api</artifactId>
-			<version>2.6.1</version>
+			<version>2.8.0</version>
 		</dependency>
 		<!--安全模块-->
 		<dependency>
 			<groupId>com.pig4cloud</groupId>
 			<artifactId>pig-common-security</artifactId>
-			<version>2.6.1</version>
+			<version>2.8.0</version>
 		</dependency>
 		<!--日志处理-->
 		<dependency>
 			<groupId>com.pig4cloud</groupId>
 			<artifactId>pig-common-log</artifactId>
-			<version>2.6.1</version>
+			<version>2.8.0</version>
 		</dependency>
 		<!--接口文档-->
 		<dependency>
 			<groupId>com.pig4cloud</groupId>
 			<artifactId>pig-common-swagger</artifactId>
-			<version>2.6.1</version>
+			<version>2.8.0</version>
+		</dependency>
+		<!--mybatis 模块-->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-common-mybatis</artifactId>
+			<version>2.8.0</version>
 		</dependency>
 		<!--注册中心客户端-->
 		<dependency>
@@ -64,28 +72,11 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
-		<!--mybatis-->
+		<!--断路器依赖-->
 		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>${mybatis-plus.version}</version>
-		</dependency>
-		<!--数据库-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<!--web 模块-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<!--排除tomcat依赖-->
-				<exclusion>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-					<groupId>org.springframework.boot</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-common-sentinel</artifactId>
+			<version>2.8.0</version>
 		</dependency>
 		<!--undertow容器-->
 		<dependency>
@@ -99,6 +90,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,17 +1,19 @@
 /*
- *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
- *  <p>
- *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  <p>
- * https://www.gnu.org/licenses/lgpl.html
- *  <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *  *  Copyright (c) 2019-2020, 冷冷 (wangiegie@gmail.com).
+ *  *  <p>
+ *  *  Licensed under the GNU Lesser General Public License 3.0 (the "License");
+ *  *  you may not use this file except in compliance with the License.
+ *  *  You may obtain a copy of the License at
+ *  *  <p>
+ *  * https://www.gnu.org/licenses/lgpl.html
+ *  *  <p>
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
  */
 
 package com.pig4cloud.pig.common.security.service;
@@ -21,10 +23,11 @@ import cn.hutool.core.util.StrUtil;
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
+import com.pig4cloud.pig.common.core.constant.CacheConstants;
 import com.pig4cloud.pig.common.core.constant.CommonConstants;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
@@ -48,21 +51,22 @@ import java.util.Set;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PigUserDetailsServiceImpl implements UserDetailsService {
+
 	private final RemoteUserService remoteUserService;
+
 	private final CacheManager cacheManager;
 
 	/**
 	 * 用户密码登录
-	 *
 	 * @param username 用户名
 	 * @return
 	 */
 	@Override
 	@SneakyThrows
 	public UserDetails loadUserByUsername(String username) {
-		Cache cache = cacheManager.getCache("user_details");
+		Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
 		if (cache != null && cache.get(username) != null) {
 			return (PigUser) cache.get(username).get();
 		}
@@ -75,7 +79,6 @@ public class PigUserDetailsServiceImpl implements UserDetailsService {
 
 	/**
 	 * 构建userdetails
-	 *
 	 * @param result 用户信息
 	 * @return
 	 */
@@ -93,12 +96,14 @@ public class PigUserDetailsServiceImpl implements UserDetailsService {
 			dbAuthsSet.addAll(Arrays.asList(info.getPermissions()));
 
 		}
-		Collection<? extends GrantedAuthority> authorities
-			= AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
+		Collection<? extends GrantedAuthority> authorities = AuthorityUtils
+				.createAuthorityList(dbAuthsSet.toArray(new String[0]));
 		SysUser user = info.getSysUser();
 
 		// 构造security用户
-		return new PigUser(user.getUserId(), user.getDeptId(), user.getUsername(), SecurityConstants.BCRYPT + user.getPassword(),
-			StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL), true, true, true, authorities);
+		return new PigUser(user.getUserId(), user.getDeptId(), user.getUsername(),
+				SecurityConstants.BCRYPT + user.getPassword(),
+				StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL), true, true, true, authorities);
 	}
+
 }

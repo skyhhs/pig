@@ -2,14 +2,16 @@ FROM anapsix/alpine-java:8_server-jre_unlimited
 
 MAINTAINER wangiegie@gmail.com
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ENV TZ=Asia/Shanghai
 
-RUN mkdir -p /pigx-upms
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-WORKDIR /pigx-upms
+RUN mkdir -p /pig-upms
+
+WORKDIR /pig-upms
 
 EXPOSE 4000
 
-ADD ./pig-upms/pig-upms-biz/target/pig-upms-biz.jar ./
+ADD ./target/pig-upms-biz.jar ./
 
 CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar pig-upms-biz.jar
